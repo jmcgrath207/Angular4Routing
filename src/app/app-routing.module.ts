@@ -8,6 +8,7 @@ import {ServersComponent} from './servers/servers.component';
 import {UserComponent} from './users/user/user.component';
 import {UsersComponent} from './users/users.component';
 import {HomeComponent} from './home/home.component';
+import {AuthGuardService} from './auth-guard.service';
 
 
 // Routes work from top down
@@ -16,7 +17,7 @@ const appRoutes: Routes = [
   { path: 'users', component: UsersComponent, children: [
     { path: ':id/:name', component: UserComponent}
   ]},
-  { path: 'servers', component: ServersComponent, children: [
+  { path: 'servers', canActivate: [AuthGuardService], component: ServersComponent, children: [
     { path: ':id', component: ServerComponent},
     { path: ':id/edit', component: EditServerComponent}
   ]},
